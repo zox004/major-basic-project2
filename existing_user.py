@@ -40,7 +40,7 @@ def existing_user():
 
         for i in range(len(id_list)):       #존재하는 ID 중에서 입력한 ID가 있는지 체크
             position = id_list[i].find('.')
-            id_list[i] = id_list[i][:int(position)]     #ID.txt 문자열로 저장되어있기때문에 ID 문자열로만 저장하는 작업
+            id_list[i] = id_list[i][:int(position)]     #문자열 ID.txt로 저장되어있기때문에 문자열 ID로만 저장하는 작업
             if id == id_list[i]:
                 id_correct = 1
                 break
