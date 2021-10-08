@@ -28,7 +28,7 @@ def existing_user():
                 clear()
         elif error_count == 3:                                 #ID 3회 불일치일 경우
             print("사용자 ID 혹은 PW가 옳지 않습니다.({}회)".format(error_count))
-            sleep(2)
+            sleep(5)
             clear()
             exit()
 
