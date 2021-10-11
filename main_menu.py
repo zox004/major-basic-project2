@@ -1,9 +1,10 @@
 import os
 from time import sleep
+import new_password as np
 
 clear = lambda : os.system('cls')
 
-def main_menu():
+def main_menu(id):
     clear()
     print("1. 기존 PW 찾기")
     print("2. 기존 PW 변경")
@@ -16,13 +17,13 @@ def main_menu():
         sleep(2)
         clear()
         main_menu()
-    elif num == 1:
+    elif num == '1':
         pass
-    elif num == 2:
+    elif num == '2':
         pass
-    elif num == 3:
-        pass
-    elif num == 4:
+    elif num == '3':
+        np.new_password(id)
+    elif num == '4':
         exit()
     else:
         clear()
