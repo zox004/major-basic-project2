@@ -1,8 +1,6 @@
 import os
 clear = lambda : os.system('cls')
-from time import sleep 
-from existing_user import *  # 왜 안불러오는거야!!!! 안뤼눌니얼ㄴ이ㅜㅏ미누 '
-import re
+from time import sleep
 
 def new_password(id) :
     clear()
