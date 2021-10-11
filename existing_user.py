@@ -24,11 +24,11 @@ def existing_user():
                 print("ID는 ", id)
                 print("PW는 ", id_data[0])
                 print("입니다.")
-                sleep(2)
+                sleep(5)
                 clear()
         elif error_count == 3:                                 #ID 3회 불일치일 경우
             print("사용자 ID 혹은 PW가 옳지 않습니다.({}회)".format(error_count))
-            sleep(5)
+            sleep(2)
             clear()
             exit()
 
@@ -58,7 +58,7 @@ def existing_user():
                     clear()
                     print(id, "님 환영합니다.")
                     sleep(2)
-                    mm.main_menu()
+                    mm.main_menu(id)
                     exit()
                 elif pw != id_data[0]:
                     error_count = error_count + 1
