@@ -18,7 +18,12 @@ def existing_user():
             print("힌트를 드립니다.\n")
             print("힌트질문:", id_data[1])
             answer = input("힌트 답: ")
-
+            if answer == "":
+                clear()
+                print("입력된 값이 없습니다. 다시 입력해주세요.")
+                sleep(2)
+                clear()
+                continue
             if answer == id_data[2]:
                 clear()
                 print("ID는 ", id)
@@ -26,6 +31,8 @@ def existing_user():
                 print("입니다.")
                 sleep(5)
                 clear()
+            else:
+                exit()
         elif error_count == 3:                                 #ID 3회 불일치일 경우
             print("사용자 ID 혹은 PW가 옳지 않습니다.({}회)".format(error_count))
             sleep(2)
@@ -36,7 +43,19 @@ def existing_user():
         id_list = os.listdir(path_dir)   #Data 디렉터리에 있는 id.txt들
 
         id = input("ID : ")
+        if id == '':
+            clear()
+            print("입력된 값이 없습니다. 다시 입력해주세요.")
+            sleep(2)
+            clear()
+            continue
         pw = input("PW : ")
+        if pw == '':
+            clear()
+            print("입력된 값이 없습니다. 다시 입력해주세요.")
+            sleep(2)
+            clear()
+            continue
 
         for i in range(len(id_list)):       #존재하는 ID 중에서 입력한 ID가 있는지 체크
             position = id_list[i].find('.')
