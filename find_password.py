@@ -2,6 +2,7 @@ import os
 from time import sleep
 import pandas as pd
 import main_menu as mm
+from msvcrt import getch
 
 clear = lambda : os.system('cls')
 
@@ -17,6 +18,7 @@ def find_password(id):
             condition3 = []
             condition4 = []
             condition5 = []
+            row_len = 0
             cnt = 1
 
             for line in user_info.readlines()[3:]:
@@ -33,11 +35,16 @@ def find_password(id):
                 row_len = cnt
                 cnt = cnt + 1
 
-            # dns.sort()
             df_user_info = pd.DataFrame({'사이트':dns, 'ID':id_list, 'PW':pw_list,
                                         'condition1':condition1, 'condition2':condition2, 'condition3':condition3,
                                         'condition4':condition4, 'condition5':condition5})
-            
+            if row_len == 0:        #저장된 사이트가 없을 시 임시 코드
+                clear()
+                print('저장된 사이트가 없습니다.')
+                print('새로운 사이트를 추가해주세요.')
+                sleep(2)
+                mm.main_menu(id)
+                
             for i in range(row_len):
                 print('{}. {}'.format(i+1, df_user_info['사이트'][i]))
             try:
@@ -49,7 +56,7 @@ def find_password(id):
                     print("PW는 {}".format(df_user_info['PW'][num-1]))
                     print("입니다.")
                     print("아무키나 누르면 메인화면으로 돌아갑니다.")
-                    sleep(2)
+                    getch()
                     clear()
                     mm.main_menu(id)
                 else:
