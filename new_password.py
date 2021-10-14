@@ -1,6 +1,7 @@
 import os
 clear = lambda : os.system('cls')
-from time import sleep
+from time import sleep 
+import main_menu as mm
 
 def new_password(id) :
     clear()
@@ -26,7 +27,7 @@ def new_password(id) :
 
     print("새로운 사이트의 PW조건을 입력해주세요.")
 
-    password_conditions = ["N", "N", "N", "N", "N"] # PW 조건 디폴트 값 
+    password_conditions = ["N", "N", "N", "N", 0] # PW 조건 디폴트 값 
     print("PW 에 콤마는 들어갈 수 없습니다.")
 
     while True :
@@ -98,24 +99,26 @@ def new_password(id) :
             continue
 
     while True :
-        minimum_number = input("PW 조건(최소자릿수-숫자 여부 -> Y/N) : ")
-        if(minimum_number==""):
-            print("입력된 값이 없습니다. 다시 입력해주세요.")
-            sleep(2)
-            continue
-        if(minimum_number == "Y" or minimum_number == "N"):
-            if(minimum_number == "Y"):
-                password_conditions[4] = "Y"
-                break
-            else :
-                break
-        else :
-            print("올바른 입력이 아닙니다. 다시 입력해주세요.")
-            sleep(2)
-            continue
+        try:
+            minimum_number = input("PW 조건(최소자릿수-숫자) : ")
+            minimum_number = int(minimum_number)
+            password_conditions[4] = minimum_number
+            break
+        except ValueError:
+            if minimum_number == "" : # 입력받은 값이 없을 경우 ..
+                clear()
+                print("입력된 값이 없습니다. 다시 입력해주세요.")
+                sleep(2)
+                clear()
+                continue
+            else: # 공백처리 문자열처리 .. 
+                clear()
+                print("올바른 입력이 아닙니다. 다시 입력해주세요.")
+                sleep(2)
+                clear()
+                continue
 
-
-    user_info = open("Data\\"+id+'.txt', "a", encoding='utf8')
+    user_info = open("Data\\{}.txt".format(id), "a", encoding='utf8')
 
     print("<새로운 Password 등록>")
     print("사이트명 : {}".format(DNS))
@@ -138,17 +141,8 @@ def new_password(id) :
         else:
             break
 
-
-
-
     while True :
         clear() 
-
-        print("특수문자 포함 여부 : {}".format(password_conditions[0]))
-        print("숫자 포함 여부 : {}".format(password_conditions[1]))
-        print("대문자 포함 여부 : {}".format(password_conditions[2]))
-        print("소문자 포함 여부 : {}".format(password_conditions[3]))
-
 
         site_password = input("PW : ")
 
@@ -232,19 +226,25 @@ def new_password(id) :
                 continue
         
         # 최소 자릿수 검사 
-        
+        if(len(site_password) < password_conditions[4]) :
+            print("올바른 입력이 아닙니다. 다시 입력해주세요.")
+            sleep(2)
+            continue
+
+
         break
 
-    user_info.write("{} , ".format(DNS))
-    user_info.write("{} , ".format(site_id))
-    user_info.write("{} , ".format(site_password))
+    user_info.write("{},".format(DNS))
+    user_info.write("{},".format(site_id))
+    user_info.write("{},".format(site_password))
     # password_conditions_string = ','.join(password_conditions)
     # user_info.write("{}".format(password_conditions))
     for index, i in enumerate(password_conditions):
         if index == 4:
-            user_info.write(i)
+            user_info.write("{}".format(i))
             break
-        user_info.write("{} , ".format(i))
+        user_info.write("{},".format(i))
     print("", file=user_info)
 
     user_info.close()
+    mm.main_menu(id)
