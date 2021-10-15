@@ -20,13 +20,13 @@ def integrity_test():
             with open("Data\\{}".format(line), 'r', encoding='utf8') as user_info:
                 for i, line in enumerate(user_info.readlines()[:3]):
                     if i == 0:
-                        pw = line
+                        pw = line.strip()
                     if i == 1:
-                        hint_question = line
+                        hint_question = line.strip()
                     if i == 2:
-                        hint_answer = line
+                        hint_answer = line.strip()
                 for i in pw:
-                    if not (48<=ord(i)<=57 or 65<=ord(i)<=90 or 97<=ord(i)<=122 or 4<=len(pw)<=10):
+                    if not (48<=ord(i)<=57 or 65<=ord(i)<=90 or 97<=ord(i)<=122) or not 4<=len(pw)<=10:
                         clear()
                         print("규칙에 위배되는 데이터가 존재합니다2.")
                         sleep(2)
