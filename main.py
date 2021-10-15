@@ -14,7 +14,7 @@ def integrity_test():
         for line in id_list:
             position = line.find('.')
             if not (4<=position<=10 or line[position+1:]=='txt'):
-                print("규칙에 위배되는 데이터가 존재합니다.")
+                print("규칙에 위배되는 데이터가 존재합니다1.")
                 sleep(2)
                 exit()
             with open("Data\\{}".format(line), 'r', encoding='utf8') as user_info:
@@ -26,14 +26,14 @@ def integrity_test():
                     if i == 2:
                         hint_answer = line
                 for i in pw:
-                    if not (48<=ord(i)<=57 or 65<=ord(i)<=90 or 97<=ord(i)<=122 or 4<len(pw)<10):
+                    if not (48<=ord(i)<=57 or 65<=ord(i)<=90 or 97<=ord(i)<=122 or 4<=len(pw)<=10):
                         clear()
-                        print("규칙에 위배되는 데이터가 존재합니다.")
+                        print("규칙에 위배되는 데이터가 존재합니다2.")
                         sleep(2)
                         exit()
                 if not (len(hint_question) <= 50 or len(hint_answer) <= 50):
                         clear()
-                        print("규칙에 위배되는 데이터가 존재합니다.")
+                        print("규칙에 위배되는 데이터가 존재합니다3.")
                         sleep(2)
                         exit()
         sm.start_menu()
@@ -46,4 +46,5 @@ def integrity_test():
         clear()
         nu.new_user()
         pass
+    
 integrity_test()
