@@ -120,12 +120,11 @@ def new_password(id) :
 
     user_info = open("Data\\{}.txt".format(id), "a", encoding='utf8')
 
-    print("<새로운 Password 등록>")
-    print("사이트명 : {}".format(DNS))
-
 
     while True :
         clear()
+        print("<새로운 Password 등록>\n")
+        print("사이트명 : {}".format(DNS))
         site_id = input("ID : ")
         if (site_id == ""):
             print("입력된 값이 없습니다. 다시 입력해주세요.")
