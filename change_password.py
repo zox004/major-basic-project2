@@ -7,9 +7,10 @@ clear = lambda : os.system('cls')
 
 #레코드를 dataframe으로 바꿔주는 함수
 def text2dataframe(user_info):
+
     dns = []
-    id_list = []
-    pw_list = []
+    site_exiting_id_list = []
+    site_exiting_pw_list = []
     condition1 = []
     condition2 = []
     condition3 = []
@@ -21,8 +22,8 @@ def text2dataframe(user_info):
         line = line.strip()
         user_info_row = line.split(',')
         dns.append(user_info_row[0])
-        id_list.append(user_info_row[1])
-        pw_list.append(user_info_row[2])
+        site_exiting_id_list.append(user_info_row[1])
+        site_exiting_pw_list.append(user_info_row[2])
         condition1.append(user_info_row[3])
         condition2.append(user_info_row[4])
         condition3.append(user_info_row[5])
@@ -31,16 +32,16 @@ def text2dataframe(user_info):
         row_len = cnt
         cnt = cnt + 1
 
-    df_user_info = pd.DataFrame({'사이트':dns, 'ID':id_list, 'PW':pw_list,
+    df_user_info = pd.DataFrame({'사이트':dns, 'ID':site_exiting_id_list, 'PW':site_exiting_pw_list,
                                 'condition1':condition1, 'condition2':condition2, 'condition3':condition3,
                                 'condition4':condition4, 'condition5':condition5})
     return row_len, df_user_info
     
 
-def change_password(id):
+def change_password(existing_user_id):
     while True:
         print('저장된 사이트 리스트')
-        user_info = open("Data\\"+id+".txt", "r", encoding='utf8')
+        user_info = open("Data\\"+existing_user_id+".txt", "r", encoding='utf8')
         row_len, df_user_info = text2dataframe(user_info)
         user_info.close()
         
@@ -258,7 +259,7 @@ def change_password(id):
                     break
                 
                 #변경된 레코드 수정
-                with open("Data\\"+id+".txt", "r", encoding='utf8') as user_info:
+                with open("Data\\"+existing_user_id+".txt", "r", encoding='utf8') as user_info:
                     lines = user_info.readlines()
                     new_text_content = ''
                     for i, line in enumerate(lines):
@@ -270,10 +271,10 @@ def change_password(id):
                         else:
                             new_line = line.strip()
                         new_text_content += new_line + '\n'
-                with open("Data\\"+id+".txt", "w", encoding='utf8') as user_info:
+                with open("Data\\"+existing_user_id+".txt", "w", encoding='utf8') as user_info:
                     user_info.write(new_text_content)
                 clear()
-                mm.main_menu(id)
+                mm.main_menu(existing_user_id)
             else:
                 clear()
                 print("올바른 입력이 아닙니다. 다시 입력해주세요.")
