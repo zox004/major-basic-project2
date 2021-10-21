@@ -1,10 +1,12 @@
 import os
 from time import sleep
 import new_password as np
+import find_password as fp
+import change_password as cp
 
 clear = lambda : os.system('cls')
 
-def main_menu(id):
+def main_menu(user_exiting_id):
     clear()
     print("1. 기존 PW 찾기")
     print("2. 기존 PW 변경")
@@ -16,13 +18,16 @@ def main_menu(id):
         print("입력된 값이 없습니다. 다시 입력해주세요.")
         sleep(2)
         clear()
-        main_menu()
+        main_menu(user_exiting_id)
     elif num == '1':
-        pass
+        clear()
+        fp.find_password(user_exiting_id)
     elif num == '2':
-        pass
+        clear()
+        cp.change_password(user_exiting_id)
     elif num == '3':
-        np.new_password(id)
+        clear()
+        np.new_password(user_exiting_id)
     elif num == '4':
         exit()
     else:
@@ -30,5 +35,5 @@ def main_menu(id):
         print("올바른 입력이 아닙니다. 다시 입력해주세요.")
         sleep(2)
         clear()
-        main_menu()
+        main_menu(user_exiting_id)
 
