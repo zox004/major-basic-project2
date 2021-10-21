@@ -19,8 +19,10 @@ def start_menu():
         clear()
         start_menu()
     elif num == '1':
+        clear()
         eu.existing_user()
     elif num == '2':
+        clear()
         nu.new_user()
     else:
         clear()
