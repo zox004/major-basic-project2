@@ -16,6 +16,10 @@ def new_password(id):
             sleep(2)
             clear()
             continue
+        elif (DNS.count(",") > 0):
+            print("콤마(구분자)를 포함하고 있습니다.")
+            sleep(2)
+            continue
         elif (DNS.count(" ") > 0):
             clear()
             print("올바른 입력이 아닙니다. 다시 입력해주세요.")
@@ -145,7 +149,6 @@ def new_password(id):
             break
 
     while True:
-        clear()
 
         site_password = input("PW : ")
 
