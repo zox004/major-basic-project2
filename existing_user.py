@@ -43,7 +43,10 @@ def existing_user():
         path_dir = 'Data'                #Data 디렉터리 
         user_id_list = os.listdir(path_dir)   #Data 디렉터리에 있는 id.txt들
 
-        existing_user_id = input("ID : ")
+        if user_exiting_id_correct == True:
+            print("ID : {}".format(existing_user_id))
+        else:
+            existing_user_id = input("ID : ")
         if existing_user_id == '':
             clear()
             print("입력된 값이 없습니다. 다시 입력해주세요.")
@@ -64,8 +67,10 @@ def existing_user():
             if existing_user_id == user_id_list[i]:
                 user_exiting_id_correct = 1
                 break
-            elif i == len(user_id_list)-1:       #Data 디렉터리내의 모든 파일 검사 후 불일치 횟수 증가
-                error_count = error_count + 1
+            elif i == len(user_id_list)-1:       #Data 디렉터리내의 모든 파일 검사 후 error_count 없이 재입력받기
+                clear()
+                print("존재하지 않는 ID입니다. 다시 입력해주세요.")
+                sleep(2)
                 user_exiting_id_correct = 0
                 continue
 
