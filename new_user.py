@@ -29,6 +29,7 @@ def new_user():
             clear()
             print("이미 가입된 ID 입니다.\n초기 화면으로 돌아갑니다.")
             sleep(2)
+            clear()
             continue
 
         elif(len(new_id)<4 or len(new_id)>10):
