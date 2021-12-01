@@ -19,11 +19,6 @@ def remove_password(user_id):
             dns = []
             id_list = []
             pw_list = []
-            condition1 = []
-            condition2 = []
-            condition3 = []
-            condition4 = []
-            condition5 = []
             row_len = 0
             cnt = 1
 
@@ -33,17 +28,10 @@ def remove_password(user_id):
                 dns.append(user_info_row[0])
                 id_list.append(user_info_row[1])
                 pw_list.append(user_info_row[2])
-                condition1.append(user_info_row[3])
-                condition2.append(user_info_row[4])
-                condition3.append(user_info_row[5])
-                condition4.append(user_info_row[6])
-                condition5.append(user_info_row[7])
                 row_len = cnt
                 cnt = cnt + 1
 
-            df_user_info = pd.DataFrame({'사이트':dns, 'ID':id_list, 'PW':pw_list,
-                                        'condition1':condition1, 'condition2':condition2, 'condition3':condition3,
-                                        'condition4':condition4, 'condition5':condition5})
+            df_user_info = pd.DataFrame({'사이트':dns, 'ID':id_list, 'PW':pw_list})
             if row_len == 0:        #저장된 사이트가 없을 시 임시 코드
                 clear()
                 print('저장된 사이트가 없습니다.')
@@ -63,10 +51,7 @@ def remove_password(user_id):
                     for i in range(row_len):
                         if i==site-1:
                             continue
-                        new_line = "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(df_user_info['사이트'][i],df_user_info['ID'][i],df_user_info["PW"][i],
-                                                                    df_user_info['condition1'][i],df_user_info['condition2'][i],
-                                                                    df_user_info['condition3'][i],df_user_info['condition4'][i],
-                                                                    df_user_info['condition5'][i])
+                        new_line = "{}\t{}\t{}".format(df_user_info['사이트'][i],df_user_info['ID'][i],df_user_info["PW"][i])
                         new_text_content += new_line + '\n'
                     with open("Data\\"+user_id+".txt", "w", encoding='utf8') as user_info:
                         user_info.write(new_text_content)
@@ -86,10 +71,7 @@ def remove_password(user_id):
                         for i in range(row_len):
                             if i==site_index[0]:
                                 continue
-                            new_line = "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(df_user_info['사이트'][i],df_user_info['ID'][i],df_user_info["PW"][i],
-                                                                        df_user_info['condition1'][i],df_user_info['condition2'][i],
-                                                                        df_user_info['condition3'][i],df_user_info['condition4'][i],
-                                                                        df_user_info['condition5'][i])
+                            new_line = "{}\t{}\t{}".format(df_user_info['사이트'][i],df_user_info['ID'][i],df_user_info["PW"][i])
                             new_text_content += new_line + '\n'
                         with open("Data\\"+user_id+".txt", "w", encoding='utf8') as user_info:
                             user_info.write(new_text_content)
