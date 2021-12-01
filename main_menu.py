@@ -60,4 +60,3 @@ def main_menu(user_exiting_id):
         sleep(2)
         clear()
         main_menu(user_exiting_id)
-
