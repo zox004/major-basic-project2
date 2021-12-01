@@ -9,8 +9,6 @@ clear = lambda : os.system('cls')
 def text2dataframe(user_info):
 
     dns = []
-    site_exiting_id_list = []
-    site_exiting_pw_list = []
     condition1 = []
     condition2 = []
     condition3 = []
@@ -18,54 +16,69 @@ def text2dataframe(user_info):
     condition5 = []
     cnt = 1
 
-    for line in user_info.readlines()[3:]:
+    for line in user_info.readlines()[:]:
         line = line.strip()
-        user_info_row = line.split(',')
+        user_info_row = line.split('\t')
         dns.append(user_info_row[0])
-        site_exiting_id_list.append(user_info_row[1])
-        site_exiting_pw_list.append(user_info_row[2])
-        condition1.append(user_info_row[3])
-        condition2.append(user_info_row[4])
-        condition3.append(user_info_row[5])
-        condition4.append(user_info_row[6])
-        condition5.append(user_info_row[7])
+        condition1.append(user_info_row[1])
+        condition2.append(user_info_row[2])
+        condition3.append(user_info_row[3])
+        condition4.append(user_info_row[4])
+        condition5.append(user_info_row[5])
         row_len = cnt
         cnt = cnt + 1
 
-    df_user_info = pd.DataFrame({'사이트':dns, 'ID':site_exiting_id_list, 'PW':site_exiting_pw_list,
-                                'condition1':condition1, 'condition2':condition2, 'condition3':condition3,
-                                'condition4':condition4, 'condition5':condition5})
+    df_user_info = pd.DataFrame({'사이트':dns, 'condition1':condition1, 'condition2':condition2,
+                                'condition3':condition3, 'condition4':condition4, 'condition5':condition5})
     return row_len, df_user_info
     
 
 def change_password(existing_user_id):
     while True:
         print('저장된 사이트 리스트')
-        user_info = open("Data\\"+existing_user_id+".txt", "r", encoding='utf8')
+        user_info = open("Data\\pw_conditions.txt", "r", encoding='utf8')
         row_len, df_user_info = text2dataframe(user_info)
         user_info.close()
+
         
         for i in range(row_len):
             print('{}. {}'.format(i+1, df_user_info['사이트'][i]))
         try:
-            num = input('\nPW를 변경하고자 하는 사이트의 번호를 입력해주세요: ')
+            with open("Data\\"+existing_user_id+".txt", "r", encoding='utf8') as user_info:
+                dns = []
+                id_list = []
+                pw_list = []
+                row_len = 0
+                cnt = 1
+
+                for line in user_info.readlines()[3:]:
+                    line = line.strip()
+                    user_info_row = line.split('\t')
+                    dns.append(user_info_row[0])
+                    id_list.append(user_info_row[1])
+                    pw_list.append(user_info_row[2])
+                    row_len = cnt
+                    cnt = cnt + 1
+
+                df_user_info2 = pd.DataFrame({'사이트':dns, 'ID':id_list, 'PW':pw_list})
+            num = input('\nPW를 변경하고자 하는 사이트의 번호 또는 DNS를 입력해주세요: ')
             num = int(num)
             if 0 < num <= row_len:
                 clear()
                 print("사이트 : {}".format(df_user_info['사이트'][num-1]))
                 print("<변경 전>")
-                print("PW 에 콤마는 들어갈 수 없습니다.")
+                print("PW 에 탭은 들어갈 수 없습니다.")
                 print("PW 조건(특수문자 여부 -> Y/N) : {}".format(df_user_info['condition1'][num-1]))
                 print("PW 조건(숫자 여부 -> Y/N) : {}".format(df_user_info['condition2'][num-1]))
                 print("PW 조건(대문자 여부 -> Y/N) : {}".format(df_user_info['condition3'][num-1]))
                 print("PW 조건(소문자 여부 -> Y/N) : {}".format(df_user_info['condition4'][num-1]))
                 print("PW 조건(최소자릿수-숫자) : {}\n".format(df_user_info['condition5'][num-1]))
-                print("PW : {}\n".format(df_user_info['PW'][num-1]))
+                print("PW : {}\n".format(df_user_info2['PW'][num-1]))
 
                 print("********************************\n")
 
                 print("<변경 후>")
-                print("PW 에 콤마는 들어갈 수 없습니다.")
+                print("PW 에 탭은 들어갈 수 없습니다.")
                 while True :
                     special_character = input("PW 조건(특수문자 여부 -> Y/N) : ")
                     if(special_character==""):
@@ -255,7 +268,7 @@ def change_password(existing_user_id):
                         print("올바른 입력이 아닙니다. 다시 입력해주세요.")
                         sleep(2)
                         continue
-                    df_user_info['PW'][num-1] = new_pw
+                    df_user_info2['PW'][num-1] = new_pw
                     break
                 
                 #변경된 레코드 수정
@@ -264,10 +277,7 @@ def change_password(existing_user_id):
                     new_text_content = ''
                     for i, line in enumerate(lines):
                         if i == num-1+3:        #num-1
-                            new_line = "{},{},{},{},{},{},{},{}".format(df_user_info['사이트'][num-1],df_user_info['ID'][num-1],df_user_info["PW"][num-1],
-                                                                        df_user_info['condition1'][num-1],df_user_info['condition2'][num-1],
-                                                                        df_user_info['condition3'][num-1],df_user_info['condition4'][num-1],
-                                                                        df_user_info['condition5'][num-1])
+                            new_line = "{}\t{}\t{}".format(df_user_info2['사이트'][num-1],df_user_info2['ID'][num-1],df_user_info2["PW"][num-1])
                         else:
                             new_line = line.strip()
                         new_text_content += new_line + '\n'
