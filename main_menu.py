@@ -35,6 +35,7 @@ def main_menu(user_exiting_id):
     elif num == '5':
         #암호화
         encoding_line = ""
+        encoding_line2 = ""
         with open("Data\\{}.txt".format(user_exiting_id), "r", encoding='utf8') as user_info:
             for line in user_info.readlines():
                 for i in line:
@@ -53,6 +54,25 @@ def main_menu(user_exiting_id):
                     encoding_line += chr(tmp)
         with open("Data\\{}.txt".format(user_exiting_id), "w", encoding='utf8') as user_info:
             user_info.write(encoding_line)
+
+        with open("Data\\{}.txt".format("pw_conditions"), "r", encoding='utf8') as user_info:
+            for line in user_info.readlines():
+                for i in line:
+                    if i == '\n':
+                        encoding_line2 += '\n'
+                        continue
+                    elif i == '\t':
+                        encoding_line2 += '\t'
+                        continue
+                    elif 65 <= ord(i) <= 122:
+                        tmp = ord(i)-30
+                    elif 33 <= ord(i) <= 64:
+                        tmp = ord(i)-30
+                    else:
+                        tmp = ord(i)-100
+                    encoding_line2 += chr(tmp)
+        with open("Data\\{}.txt".format("pw_conditions"), "w", encoding='utf8') as user_info:
+            user_info.write(encoding_line2)        
         exit()
     else:
         clear()
