@@ -1,10 +1,3 @@
-# 새로운 PW 추가 화면 2021 / 10 / 10 -- 조경혁 수정 
-
-#existing_user 일 경우 각각 입력받은 ID 를 id 변수에 입력
-#변수명 변경.. user 패스워드는 user_new_password
-#사이트 패스워드는 site_password !! 
-#새로운 사이트의 ID 조건은 ??? 
-
 import os
 clear = lambda : os.system('cls')
 from time import sleep 
@@ -287,7 +280,18 @@ def new_password(user_existing_id) :
 
 def password_conditions_load(DNS, password_conditions, user_existing_id):
     lines=[]
-    pw_condition_file = open("Data\\pw_conditions.txt", "r", encoding='utf8')
+    try:
+        pw_condition_file = open("Data\\pw_conditions.txt", "r+", encoding='utf8')
+    except FileNotFoundError:
+        pw_condition_file = open("pw_conditions.txt", "w", encoding='utf8')
+        pw_condition_file.close()
+        import shutil 
+        filename = 'pw_conditions.txt'
+        src = '' 
+        dir = 'Data\\' 
+        shutil.move(src + filename, dir + filename)
+        pw_condition_file = open("Data\\pw_conditions.txt", "r+", encoding='utf8')
+        #new_password(user_existing_id)
     str=' '
     str_list = []
     cnt = 0
