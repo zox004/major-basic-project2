@@ -11,12 +11,15 @@ def integrity_test():
     id_list = os.listdir(path_dir)   #Data 디렉터리에 있는 id.txt들
     if id_list:
         clear()
+        cnt = 0
         for ids in id_list:
+            cnt += 1
             # position = ids.find('.')
-            # # if not (4<=position<=10 or line[position+1:]=='txt'):
-            # #     print("규칙에 위배되는 데이터가 존재합니다1.")
-            # #     sleep(2)
-            # #     exit()
+            # if not (4<=position<=10 or line[position+1:]=='txt'):
+            #     print("규칙에 위배되는 데이터가 존재합니다1.")
+            #     sleep(2)
+            #     exit()
+
             # 복호화
             with open("Data\\{}".format(ids), 'r', encoding='utf8') as user_info:
                 text = ''
@@ -59,6 +62,14 @@ def integrity_test():
             #             print("규칙에 위배되는 데이터가 존재합니다3.")
             #             sleep(2)
             #             exit()
+        if cnt < 2:
+            if ids == "pw_conditions":
+                clear()
+                print("기존사용자가 등록되어 있지 않습니다.")
+                print("신규사용자를 등록해주세요.")
+                sleep(2)   
+                clear()
+                nu.new_user()  
         sm.start_menu()
                     
     else:
@@ -68,6 +79,5 @@ def integrity_test():
         sleep(2)   
         clear()
         nu.new_user()
-        pass
     
 integrity_test()
