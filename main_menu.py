@@ -12,7 +12,7 @@ def main_menu(user_exiting_id):
     print("1. 기존 PW 찾기")
     print("2. 기존 PW 변경")
     print("3. 새로운 PW 추가")
-    print("4. PW 삭제")
+    print("4. 저장된 PW 삭제")
     print("5. 시스템 종료\n")
     num = input("번호를 입력하여, 메뉴를 선택해주세요:")
     if num == '':
