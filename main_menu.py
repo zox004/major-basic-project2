@@ -45,6 +45,9 @@ def main_menu(user_exiting_id):
                     elif i == '\t':
                         encoding_line += '\t'
                         continue
+                    elif i == ' ':
+                        encoding_line += ' '
+                        continue
                     elif 65 <= ord(i) <= 122:
                         tmp = ord(i)-30
                     elif 33 <= ord(i) <= 64:
@@ -63,6 +66,9 @@ def main_menu(user_exiting_id):
                         continue
                     elif i == '\t':
                         encoding_line2 += '\t'
+                        continue
+                    elif i == ' ':
+                        encoding_line += ' '
                         continue
                     elif 65 <= ord(i) <= 122:
                         tmp = ord(i)-30
