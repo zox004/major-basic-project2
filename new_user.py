@@ -74,8 +74,13 @@ def new_user():
                 print("다시 입력 하세요.\n")
                 sleep(2)
                 continue
+            if str.isspace(hint_question) :
+                print("조건에 맞지 않거나 틀린 형식입니다.")
+                print("다시 입력 하세요.\n")
+                sleep(2)
+                continue
             for i in hint_question:
-                if i==' ' or i=='\t':
+                if i=='\t':
                     print("조건에 맞지 않거나 틀린 형식입니다.")
                     print("다시 입력 하세요.\n")
                     sleep(2)
@@ -90,8 +95,13 @@ def new_user():
                 print("다시 입력 하세요.\n")
                 sleep(2)
                 continue
+            if str.isspace(hint_answer) :
+                print("조건에 맞지 않거나 틀린 형식입니다.")
+                print("다시 입력 하세요.\n")
+                sleep(2)
+                continue
             for i in hint_answer:
-                if i==' ' or i=='\t':
+                if i=='\t':
                     print("조건에 맞지 않거나 틀린 형식입니다.")
                     print("다시 입력 하세요.\n")
                     sleep(2)
