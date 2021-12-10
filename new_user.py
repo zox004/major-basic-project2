@@ -69,19 +69,33 @@ def new_user():
 
         while True:
             hint_question = input("힌트 질문 : ")
-            if str.isspace(hint_question) :
+            if len(hint_question)>50:
                 print("조건에 맞지 않거나 틀린 형식입니다.")
                 print("다시 입력 하세요.\n")
                 sleep(2)
                 continue
+            for i in hint_question:
+                if i==' ' or i=='\t':
+                    print("조건에 맞지 않거나 틀린 형식입니다.")
+                    print("다시 입력 하세요.\n")
+                    sleep(2)
+                    break
             else :
                 print("{}".format(hint_question), file=new_info)
+                break
+        while True:
             hint_answer = input("힌트 답 : ")
-            if str.isspace(hint_answer) :
+            if len(hint_answer)>50:
                 print("조건에 맞지 않거나 틀린 형식입니다.")
                 print("다시 입력 하세요.\n")
                 sleep(2)
                 continue
+            for i in hint_answer:
+                if i==' ' or i=='\t':
+                    print("조건에 맞지 않거나 틀린 형식입니다.")
+                    print("다시 입력 하세요.\n")
+                    sleep(2)
+                    break
             else :
                 print("{}".format(hint_answer), file=new_info)
                 break
@@ -94,8 +108,8 @@ def new_user():
         #================ 파일 경로 변경 ================
         import shutil 
         filename = '{}.txt'.format(new_id) 
-        src = 'C:\\Users\\sinkyu\\Desktop\\PythonWorkspace\\basic_project\\' 
-        dir = 'C:\\Users\\sinkyu\\Desktop\\PythonWorkspace\\basic_project\\Data\\' 
+        src = '' 
+        dir = 'Data\\' 
         shutil.move(src + filename, dir + filename)
         #===============================================
 
