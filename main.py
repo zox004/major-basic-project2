@@ -34,6 +34,9 @@ def integrity_test():
                     elif i == '\t':
                         decoding_line += '\t'
                         continue
+                    elif i == ' ':
+                        decoding_line += ' '
+                        continue
                     elif 65-30 <= ord(i) <= 122-30:
                         tmp = ord(i)+30
                     elif 33-30 <= ord(i) <= 64-30:
